@@ -1,0 +1,24 @@
+{
+  "name": "teamup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "./startserver.sh",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedGhub/TeamUp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmedGhub/TeamUp/issues"
+  },
+  "homepage": "https://github.com/ahmedGhub/TeamUp#readme",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
+}
