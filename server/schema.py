@@ -2,7 +2,7 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
-from models import db_session, Employee as EmployeeModel
+from models import db_session, User as UserModel
 import utils
 from datetime import datetime
 
@@ -17,54 +17,54 @@ from datetime import datetime
 #     class Meta:
 #         node = Department
 
-class EmployeeAttribute:
+class UserAttribute:
     iduser = graphene.Int(description="ID OF USER")
     username = graphene.String(description="UserName of the Student.")
     userpassword = graphene.String(description="Password of the student.")
 
 
-class Employee(SQLAlchemyObjectType, EmployeeAttribute):
+class User(SQLAlchemyObjectType, UserAttribute):
     class Meta:
-        model = EmployeeModel
+        model = UserModel
         interfaces = (relay.Node, )
 
 
 
-class EmployeeConnection(relay.Connection):
+class UserConnection(relay.Connection):
     class Meta:
-        node = Employee
+        node = User
 
-class CreateEmployeeInput(graphene.InputObjectType, EmployeeAttribute):
+class CreateUserInput(graphene.InputObjectType, UserAttribute):
     """Arguments to create a person."""
     pass
 
-class CreateEmployee(graphene.Mutation):
+class CreateUser(graphene.Mutation):
     """Mutation to create a person."""
-    employee = graphene.Field(lambda: Employee, description="Person created by this mutation.")
+    user = graphene.Field(lambda: User, description="Person created by this mutation.")
 
     class Arguments:
-        input = CreateEmployeeInput(required=True)
+        input = CreateUserInput(required=True)
 
     def mutate(self, info, input):
         data = utils.input_to_dictionary(input)
         # data['created'] = datetime.utcnow()
         # data['edited'] = datetime.utcnow()
 
-        employee = EmployeeModel(**data)
-        db_session.add(employee)
+        user = UserModel(**data)
+        db_session.add(user)
         db_session.commit()
-        return CreateEmployee(employee=employee)
+        return CreateUser(user=user)
 
 
 class Mutation(graphene.ObjectType):
-    createEmployee = CreateEmployee.Field()
+    createUser = CreateUser.Field()
 
 
 class Query(graphene.ObjectType):
     node = relay.Node.Field()
     # Allows sorting over multiple columns, by default over the primary key
-    all_employees = SQLAlchemyConnectionField(EmployeeConnection)
-    employee = graphene.relay.Node.Field(Employee)
+    all_users = SQLAlchemyConnectionField(UserConnection)
+    user = graphene.relay.Node.Field(User)
     # Disable sorting over this field
     # all_departments = SQLAlchemyConnectionField(DepartmentConnection, sort=None)
 

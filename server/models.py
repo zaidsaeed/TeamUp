@@ -14,15 +14,8 @@ Base = declarative_base()
 # We will need this for querying
 Base.query = db_session.query_property()
 
-
-# class Department(Base):
-#     __tablename__ = 'department'
-#     id = Column(Integer, primary_key=True)
-#     name = Column(String)
-
-
-class Employee(Base):
+class User(Base):
     __tablename__ = 'users'
-    iduser = Column(Integer, primary_key=True)
+    iduser = Column(Integer, primary_key=True) #make sure no column names end with the letters "id"
     username = Column(String)
     userpassword = Column(String)
