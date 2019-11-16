@@ -19,3 +19,11 @@ class User(Base):
     iduser = Column(Integer, primary_key=True) #make sure no column names end with the letters "id"
     username = Column(String)
     userpassword = Column(String)
+
+class Course(Base):
+	__tablename__ = 'courses'
+	idprof = Column(Integer, primary_key=True)
+	idcourse = Column(String, primary_key=True)
+	minstudents = Column(Integer)
+	maxstudents = Column(Integer)
+	deadline = Column(Integer)	
