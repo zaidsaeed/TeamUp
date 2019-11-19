@@ -5,6 +5,7 @@ from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
 from models import db_session, User as UserModel
 from schemas.UserSchema import User, UserConnection, CreateUser
 from schemas.CourseSchema import Course, CourseConnection, CreateCourse
+from schemas.TeamSchema import Team , TeamConnection , CreateTeam
 import utils
 from datetime import datetime
 
@@ -22,7 +23,8 @@ class Query(graphene.ObjectType):
     course = graphene.relay.Node.Field(Course)
     # Disable sorting over this field
     # all_departments = SQLAlchemyConnectionField(DepartmentConnection, sort=None)
-
+    all_teams = SQLAlchemyConnectionField(TeamConnection)
+    team = graphene.relay.Node.Field(Team)
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
