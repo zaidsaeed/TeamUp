@@ -27,3 +27,12 @@ class Course(Base):
 	minstudents = Column(Integer)
 	maxstudents = Column(Integer)
 	deadline = Column(Integer)	
+ 
+class Team(Base):
+    __tablename__ = 'teams'
+    idteam=Column(Integer, primary_key=True)
+    idprof = Column(Integer, primary_key=True)
+    idcourse = Column(String, primary_key=True)
+    teamname= Column(String)
+    created_at = Column(Integer)
+    members_count = Column(Integer)	
