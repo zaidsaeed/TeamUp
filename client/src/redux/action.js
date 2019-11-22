@@ -1,21 +1,21 @@
 // types of action
 const Types = {
-  CREATE_ITEM: "CREATE_ITEM",
-  DELETE_ITEM: "DELETE_ITEM"
+  ADD_USER: "ADD_USER"
+  // DELETE_ITEM: "DELETE_ITEM"
 };
 // actions
-const createItem = task => ({
-  type: Types.CREATE_ITEM,
-  payload: task
+const addUser = user => ({
+  type: Types.ADD_USER,
+  payload: user
 });
 
-const deleteItem = id => ({
-  type: Types.DELETE_ITEM,
-  payload: id
-});
+// const deleteItem = id => ({
+//   type: Types.DELETE_ITEM,
+//   payload: id
+// });
 
 export default {
-  createItem,
-  deleteItem,
+  addUser,
+  // deleteItem,
   Types
 };

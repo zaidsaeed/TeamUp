@@ -19,6 +19,7 @@ class User(Base):
     iduser = Column(Integer, primary_key=True) #make sure no column names end with the letters "id"
     username = Column(String)
     userpassword = Column(String)
+    usertype = Column(String)
 
 class Course(Base):
 	__tablename__ = 'courses'

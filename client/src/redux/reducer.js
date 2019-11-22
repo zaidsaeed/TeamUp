@@ -2,27 +2,26 @@ import ACTIONS from "./action";
 import _ from "lodash";
 
 const defaultState = {
-  items: []
+  user: {}
 };
 
 const appReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTIONS.Types.CREATE_ITEM: {
+    case ACTIONS.Types.ADD_USER: {
       console.log(action);
 
-      let item = action.payload;
-      let newItem = { id: state.items.length + 1, description: item };
+      let user = action.payload.data.createUser.user;
       let newState = _.cloneDeep(state);
-      newState.items.push(newItem);
+      newState.user = user;
       return newState;
     }
 
-    case ACTIONS.Types.DELETE_ITEM: {
-      let newState = _.cloneDeep(state);
-      let index = _.findIndex(newState.items, { id: action.payload });
-      newState.items.splice(index, 1);
-      return newState;
-    }
+    // case ACTIONS.Types.DELETE_ITEM: {
+    //   let newState = _.cloneDeep(state);
+    //   let index = _.findIndex(newState.items, { id: action.payload });
+    //   newState.items.splice(index, 1);
+    //   return newState;
+    // }
 
     default:
       return state;

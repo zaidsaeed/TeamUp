@@ -1,23 +1,36 @@
 import React, { Component } from "react";
 import { Mutation, graphql } from "react-apollo";
 import gql from "graphql-tag";
+import { compose } from "recompose";
+import classnames from "classnames";
+import ACTIONS from "../redux/action";
+import { connect } from "react-redux";
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(ACTIONS.addUser(user))
+});
 
 const SIGN_UP = gql`
   mutation createUser(
     $iduser: Int!
     $username: String!
     $userpassword: String!
+    $usertype: String!
   ) {
     createUser(
       input: {
         iduser: $iduser
         username: $username
         userpassword: $userpassword
+        usertype: $usertype
       }
     ) {
       user {
         id
         iduser
+        username
+        userpassword
+        usertype
       }
     }
   }
@@ -29,7 +42,8 @@ class SignUp extends Component {
     this.state = {
       iduser: 0,
       username: "",
-      userpassword: ""
+      userpassword: "",
+      usertype: ""
     };
   }
 
@@ -37,6 +51,13 @@ class SignUp extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+
+  setType = type => {
+    this.setState({
+      usertype: type
+    });
+    console.log(type);
   };
 
   render() {
@@ -58,10 +79,21 @@ class SignUp extends Component {
                       const newUser = {
                         iduser: parseInt(this.state.iduser),
                         username: this.state.username,
-                        userpassword: this.state.userpassword
+                        userpassword: this.state.userpassword,
+                        usertype: this.state.usertype
                       };
-                      console.log("newEmployee", newUser);
-                      createUser({ variables: newUser });
+                      console.log("newUser", newUser);
+                      createUser({ variables: newUser })
+                        .then(data => {
+                          console.log("success");
+                          console.log(this.props);
+                          this.props.addUser(data);
+                          console.log(data);
+                        })
+                        .catch(err => {
+                          console.log("failure");
+                          console.log(err);
+                        });
                     }}
                   >
                     <div className="form-group">
@@ -96,6 +128,33 @@ class SignUp extends Component {
                       />
                     </div>
 
+                    <div class="btn-group btn-group-toggle">
+                      <label
+                        className={classnames("btn btn-primary", {
+                          active: this.state.usertype == "S"
+                        })}
+                      >
+                        <input
+                          type="checkbox"
+                          autocomplete="off"
+                          onClick={() => this.setType("S")}
+                        />{" "}
+                        Student
+                      </label>
+                      <label
+                        className={classnames("btn btn-primary", {
+                          active: this.state.usertype == "T"
+                        })}
+                      >
+                        <input
+                          type="checkbox"
+                          autocomplete="off"
+                          onClick={() => this.setType("T")}
+                        />{" "}
+                        Teacher
+                      </label>
+                    </div>
+
                     <input
                       type="submit"
                       className="btn btn-info btn-block mt-4"
@@ -111,4 +170,7 @@ class SignUp extends Component {
   }
 }
 
-export default graphql(SIGN_UP)(SignUp);
+export default compose(
+  connect(null, mapDispatchToProps),
+  graphql(SIGN_UP)
+)(SignUp);
