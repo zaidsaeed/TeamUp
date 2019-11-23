@@ -43,7 +43,8 @@ class SignUp extends Component {
       iduser: 0,
       username: "",
       userpassword: "",
-      usertype: ""
+      usertype: "",
+      errors: ""
     };
   }
 
@@ -64,7 +65,7 @@ class SignUp extends Component {
     return (
       <Mutation mutation={SIGN_UP}>
         {(createUser, { data }) => (
-          <div className="register">
+          <div className="register mt-5">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
@@ -89,10 +90,20 @@ class SignUp extends Component {
                           console.log(this.props);
                           this.props.addUser(data);
                           console.log(data);
+                          if (data.data.createUser.user.usertype === "S") {
+                            this.props.history.push("/studentChoicesMenu");
+                          } else {
+                            this.props.history.push("/teacherChoicesMenu");
+                          }
                         })
                         .catch(err => {
                           console.log("failure");
                           console.log(err);
+                          this.setState({
+                            errors:
+                              "Something went wrong went trying to create account. Please Change the entered info and try again"
+                          });
+                          console.log(this.state);
                         });
                     }}
                   >
@@ -154,10 +165,12 @@ class SignUp extends Component {
                         Teacher
                       </label>
                     </div>
-
+                    <div className="text-primary">
+                      <p>{this.state.errors}</p>
+                    </div>
                     <input
                       type="submit"
-                      className="btn btn-info btn-block mt-4"
+                      className="btn btn-block mt-4 btn-secondary"
                     />
                   </form>
                 </div>
