@@ -86,9 +86,7 @@ class SignUp extends Component {
                       console.log("newUser", newUser);
                       createUser({ variables: newUser })
                         .then(data => {
-                          console.log("success");
-                          console.log(this.props);
-                          this.props.addUser(data);
+                          this.props.addUser(data.data.createUser.user);
                           console.log(data);
                           if (data.data.createUser.user.usertype === "S") {
                             this.props.history.push("/studentChoicesMenu");
@@ -139,7 +137,7 @@ class SignUp extends Component {
                       />
                     </div>
 
-                    <div class="btn-group btn-group-toggle">
+                    <div className="btn-group btn-group-toggle">
                       <label
                         className={classnames("btn btn-primary", {
                           active: this.state.usertype == "S"
@@ -147,7 +145,7 @@ class SignUp extends Component {
                       >
                         <input
                           type="checkbox"
-                          autocomplete="off"
+                          autoComplete="off"
                           onClick={() => this.setType("S")}
                         />{" "}
                         Student
@@ -159,7 +157,7 @@ class SignUp extends Component {
                       >
                         <input
                           type="checkbox"
-                          autocomplete="off"
+                          autoComplete="off"
                           onClick={() => this.setType("T")}
                         />{" "}
                         Teacher

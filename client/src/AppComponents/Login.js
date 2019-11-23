@@ -9,14 +9,13 @@ import classnames from "classnames";
 var base64 = require("base-64");
 var utf8 = require("utf8");
 
-const mapStateToProps = state => ({
-  items: state.items
-});
-
-// const mapDispatchToProps = dispatch => ({
-//   createItem: item => dispatch(ACTIONS.createItem(item)),
-//   deleteItem: id => dispatch(ACTIONS.deleteItem(id))
+// const mapStateToProps = state => ({
+//   items: state.items
 // });
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(ACTIONS.addUser(user))
+});
 
 const LOGIN_QUERY = gql`
   query user($id: ID!) {
@@ -24,6 +23,7 @@ const LOGIN_QUERY = gql`
       iduser
       username
       userpassword
+      usertype
     }
   }
 `;
@@ -61,8 +61,14 @@ class Login extends Component {
       })
       .then(data => {
         const user = data.data.user;
+        console.log(this.props);
         if (user.userpassword == this.state.password) {
-          console.log("User successfully logged in");
+          this.props.addUser(user);
+          if (user.usertype === "S") {
+            this.props.history.push("/studentChoicesMenu");
+          } else {
+            this.props.history.push("/teacherChoicesMenu");
+          }
         } else {
           this.setState({
             errors: {
@@ -70,10 +76,8 @@ class Login extends Component {
             }
           });
         }
-        // window.localStorage.setItem("user", JSON.stringify(data.data));
       })
       .catch(err => {
-        console.log("err", err);
         this.setState({
           errors: {
             idNumber: "The idNumber you entered is incorrect"
@@ -83,9 +87,8 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
-      <div className="login">
+      <div className="login mt-5">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -124,7 +127,10 @@ class Login extends Component {
                     {this.state.errors.password}
                   </div>
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  type="submit"
+                  className="btn btn-secondary btn-block mt-4"
+                />
               </form>
             </div>
           </div>
@@ -134,4 +140,4 @@ class Login extends Component {
   }
 }
 
-export default compose(connect(mapStateToProps), withApollo)(Login);
+export default compose(connect(null, mapDispatchToProps), withApollo)(Login);

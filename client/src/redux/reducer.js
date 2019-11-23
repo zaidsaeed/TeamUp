@@ -10,7 +10,7 @@ const appReducer = (state = defaultState, action) => {
     case ACTIONS.Types.ADD_USER: {
       console.log(action);
 
-      let user = action.payload.data.createUser.user;
+      let user = action.payload;
       let newState = _.cloneDeep(state);
       newState.user = user;
       return newState;
