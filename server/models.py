@@ -16,14 +16,14 @@ Base.query = db_session.query_property()
 
 class User(Base):
     __tablename__ = 'users'
-    iduser = Column(Integer, primary_key=True) #make sure no column names end with the letters "id"
+    iduser = Column( Integer, primary_key=True) #make sure no column names end with the letters "id"
     username = Column(String)
     userpassword = Column(String)
     usertype = Column(String)
 
 class Course(Base):
 	__tablename__ = 'courses'
-	idprof = Column(Integer, primary_key=True)
+	idprof = Column(Integer, ForeignKey('users.iduser'))
 	idcourse = Column(String, primary_key=True)
 	minstudents = Column(Integer)
 	maxstudents = Column(Integer)
