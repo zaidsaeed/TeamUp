@@ -1,23 +1,36 @@
 import React, { Component } from "react";
 import { Mutation, graphql } from "react-apollo";
 import gql from "graphql-tag";
+import { compose } from "recompose";
+import classnames from "classnames";
+import ACTIONS from "../redux/action";
+import { connect } from "react-redux";
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(ACTIONS.addUser(user))
+});
 
 const SIGN_UP = gql`
   mutation createUser(
     $iduser: Int!
     $username: String!
     $userpassword: String!
+    $usertype: String!
   ) {
     createUser(
       input: {
         iduser: $iduser
         username: $username
         userpassword: $userpassword
+        usertype: $usertype
       }
     ) {
       user {
         id
         iduser
+        username
+        userpassword
+        usertype
       }
     }
   }
@@ -29,7 +42,9 @@ class SignUp extends Component {
     this.state = {
       iduser: 0,
       username: "",
-      userpassword: ""
+      userpassword: "",
+      usertype: "",
+      errors: ""
     };
   }
 
@@ -39,11 +54,18 @@ class SignUp extends Component {
     });
   };
 
+  setType = type => {
+    this.setState({
+      usertype: type
+    });
+    console.log(type);
+  };
+
   render() {
     return (
       <Mutation mutation={SIGN_UP}>
         {(createUser, { data }) => (
-          <div className="register">
+          <div className="register mt-5">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">
@@ -58,10 +80,29 @@ class SignUp extends Component {
                       const newUser = {
                         iduser: parseInt(this.state.iduser),
                         username: this.state.username,
-                        userpassword: this.state.userpassword
+                        userpassword: this.state.userpassword,
+                        usertype: this.state.usertype
                       };
-                      console.log("newEmployee", newUser);
-                      createUser({ variables: newUser });
+                      console.log("newUser", newUser);
+                      createUser({ variables: newUser })
+                        .then(data => {
+                          this.props.addUser(data.data.createUser.user);
+                          console.log(data);
+                          if (data.data.createUser.user.usertype === "S") {
+                            this.props.history.push("/studentChoicesMenu");
+                          } else {
+                            this.props.history.push("/teacherChoicesMenu");
+                          }
+                        })
+                        .catch(err => {
+                          console.log("failure");
+                          console.log(err);
+                          this.setState({
+                            errors:
+                              "Something went wrong went trying to create account. Please Change the entered info and try again"
+                          });
+                          console.log(this.state);
+                        });
                     }}
                   >
                     <div className="form-group">
@@ -96,9 +137,38 @@ class SignUp extends Component {
                       />
                     </div>
 
+                    <div className="btn-group btn-group-toggle">
+                      <label
+                        className={classnames("btn btn-primary", {
+                          active: this.state.usertype == "S"
+                        })}
+                      >
+                        <input
+                          type="checkbox"
+                          autoComplete="off"
+                          onClick={() => this.setType("S")}
+                        />{" "}
+                        Student
+                      </label>
+                      <label
+                        className={classnames("btn btn-primary", {
+                          active: this.state.usertype == "T"
+                        })}
+                      >
+                        <input
+                          type="checkbox"
+                          autoComplete="off"
+                          onClick={() => this.setType("T")}
+                        />{" "}
+                        Teacher
+                      </label>
+                    </div>
+                    <div className="text-primary">
+                      <p>{this.state.errors}</p>
+                    </div>
                     <input
                       type="submit"
-                      className="btn btn-info btn-block mt-4"
+                      className="btn btn-block mt-4 btn-secondary"
                     />
                   </form>
                 </div>
@@ -111,4 +181,7 @@ class SignUp extends Component {
   }
 }
 
-export default graphql(SIGN_UP)(SignUp);
+export default compose(
+  connect(null, mapDispatchToProps),
+  graphql(SIGN_UP)
+)(SignUp);

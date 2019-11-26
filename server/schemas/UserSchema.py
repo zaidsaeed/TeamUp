@@ -10,6 +10,7 @@ class UserAttribute:
     iduser = graphene.Int(description="ID OF USER")
     username = graphene.String(description="UserName of the Student.")
     userpassword = graphene.String(description="Password of the student.")
+    usertype = graphene.String(description="Is user student or teacher")
 
 
 class User(SQLAlchemyObjectType, UserAttribute):
@@ -33,10 +34,13 @@ class CreateUser(graphene.Mutation):
         input = CreateUserInput(required=True)
 
     def mutate(self, info, input):
+        print("input")
+        print(input)
         data = utils.input_to_dictionary(input)
         # data['created'] = datetime.utcnow()
         # data['edited'] = datetime.utcnow()
-
+        print("data")
+        print(data)
         user = UserModel(**data)
         db_session.add(user)
         db_session.commit()
