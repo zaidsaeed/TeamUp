@@ -86,6 +86,10 @@ class SignUp extends Component {
                       console.log("newUser", newUser);
                       createUser({ variables: newUser })
                         .then(data => {
+                          window.localStorage.setItem(
+                            "user",
+                            JSON.stringify(data.data.createUser.user)
+                          );
                           this.props.addUser(data.data.createUser.user);
                           console.log(data);
                           if (data.data.createUser.user.usertype === "S") {
