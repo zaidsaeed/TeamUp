@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignUp from "./AppComponents/SignUp";
 import Login from "./AppComponents/Login";
+import Landing from "./AppComponents/Landing";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 
@@ -21,7 +22,9 @@ function App() {
         <Router>
           <div>
             <Navbar />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/navbar" component={Navbar} />
             <Route exact path="/login" component={Login} />
           </div>
         </Router>

@@ -63,7 +63,9 @@ class Login extends Component {
         const user = data.data.user;
         console.log(this.props);
         if (user.userpassword == this.state.password) {
+          window.localStorage.setItem("user", JSON.stringify(data.data));
           this.props.addUser(user);
+
           if (user.usertype === "S") {
             this.props.history.push("/studentChoicesMenu");
           } else {
