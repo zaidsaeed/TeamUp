@@ -44,7 +44,7 @@ class CreateTeam(graphene.Mutation):
         # data['created'] = datetime.utcnow()
         # data['edited'] = datetime.utcnow()
 
-        Team = TeamModel(**data)
+        team = TeamModel(**data)
         db_session.add(team)
         db_session.commit()
         return CreateTeam(team=team)

@@ -10,8 +10,10 @@ import utils
 from datetime import datetime
 
 class Mutation(graphene.ObjectType):
-	createUser = CreateUser.Field()
-	createCourse = CreateCourse.Field()
+    createCourse = CreateCourse.Field()
+    createUser = CreateUser.Field()
+    createTeam= CreateTeam.Field()
+	
 
 
 class Query(graphene.ObjectType):
