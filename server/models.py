@@ -23,7 +23,7 @@ class User(Base):
 
 class Course(Base):
 	__tablename__ = 'courses'
-	idprof = Column(Integer, ForeignKey('users.iduser'))
+	idprof = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
 	idcourse = Column(String, primary_key=True)
 	minstudents = Column(Integer)
 	maxstudents = Column(Integer)
@@ -37,4 +37,11 @@ class Team(Base):
     idcourse = Column(String, primary_key=True)
     teamname= Column(String)
     created_at = Column(Integer)
-    members_count = Column(Integer)	
+    members_count = Column(Integer)
+
+class Team_Join_Request(Base):
+	__tablename__ = "team_join_requests"
+	idteam = Column(Integer, ForeignKey('team.idteam'), primary_key=True)
+	idprof = Column(Integer, ForeignKey('team.idprof'), primary_key=True)
+	idcourse = Column(String, ForeignKey('team.idcourse'), primary_key=True)
+	idstudent = Column(Integer, ForeignKey('user.iduser'), primary_key=True)
