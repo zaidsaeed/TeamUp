@@ -49,7 +49,7 @@ class newCourse extends Component {
     return (
       <Mutation mutation={NEW_COURSE}>
         {(createCourse, { data }) => (
-          <div className="register">
+          <div className="setup">
             <div className="container">
               <div className="row">
                 <div className="col-md-8 m-auto">

@@ -41,7 +41,7 @@ class Team(Base):
 
 class Team_Join_Request(Base):
 	__tablename__ = "team_join_requests"
-	idteam = Column(Integer, ForeignKey('team.idteam'), primary_key=True)
-	idprof = Column(Integer, ForeignKey('team.idprof'), primary_key=True)
-	idcourse = Column(String, ForeignKey('team.idcourse'), primary_key=True)
-	idstudent = Column(Integer, ForeignKey('user.iduser'), primary_key=True)
+	idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
+	idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
+	idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
+	idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)

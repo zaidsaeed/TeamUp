@@ -14,7 +14,7 @@ class Mutation(graphene.ObjectType):
     createCourse = CreateCourse.Field()
     createUser = CreateUser.Field()
     createTeam= CreateTeam.Field()
-    CreateRequest = CreateRequest.Field()
+    createRequest = CreateRequest.Field()
 
 
 class Query(graphene.ObjectType):

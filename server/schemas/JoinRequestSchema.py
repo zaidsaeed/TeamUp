@@ -35,6 +35,6 @@ class CreateRequest(graphene.Mutation):
 		print("data")
 		print(data)
 		request = RequestModel(**data)
-		db_sessiono.add(request)
+		db_session.add(request)
 		db_session.commit()
 		return CreateRequest(request=request)
