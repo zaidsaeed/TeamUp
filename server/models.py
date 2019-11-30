@@ -31,7 +31,7 @@ class Course(Base):
  
 class Team(Base):
     __tablename__ = 'teams'
-    liason_id=Column(Integer)
+    idliason=Column(Integer)
     idteam=Column(Integer, primary_key=True)
     idprof = Column(Integer, primary_key=True)
     idcourse = Column(String, primary_key=True)
