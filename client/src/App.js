@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignUp from "./AppComponents/SignUp";
 import Login from "./AppComponents/Login";
 import Landing from "./AppComponents/Landing";
+import StudentChoicesMenu from "./AppComponents/StudentChoicesMenu";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import CreateTeam from "./AppComponents/CreateTeam";
@@ -28,6 +29,11 @@ function App() {
             <Route exact path="/navbar" component={Navbar} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/CreateTeam" component={CreateTeam} />
+            <Route
+              exact
+              path="/studentChoicesMenu"
+              component={StudentChoicesMenu}
+            />
           </div>
         </Router>
       </ReduxProvider>
