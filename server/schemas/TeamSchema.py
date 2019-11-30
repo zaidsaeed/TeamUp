@@ -9,7 +9,7 @@ import utils
 from datetime import datetime
 
 class TeamAttribute:
-	
+    liason_id=graphene.Int(description="Team Lead ID")
     members_count= graphene.Int(description="Current number of members")
     teamname= graphene.String(description = "Team name")
     idteam = graphene.Int(description="Team ID")
