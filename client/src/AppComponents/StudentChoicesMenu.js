@@ -13,14 +13,13 @@ class StudentChoicesMenu extends Component {
           display: "flex"
         }}
       >
-        <Link to="/createteam">
-          <button
-            style={{ width: "100%", height: "100%" }}
-            type="button"
-            className="btn btn-secondary disabled btn-lg btn-block"
-          >
-            Create Team
-          </button>
+        <Link
+          to="/createteam"
+          style={{ width: "100%", height: "100%" }}
+          type="button"
+          className="btn btn-secondary disabled btn-lg btn-block"
+        >
+          Create Team
         </Link>
 
         <button
