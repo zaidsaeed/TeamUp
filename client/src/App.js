@@ -7,6 +7,7 @@ import SignUp from "./AppComponents/SignUp";
 import Login from "./AppComponents/Login";
 import Landing from "./AppComponents/Landing";
 import StudentChoicesMenu from "./AppComponents/StudentChoicesMenu";
+import ProfChoicesMenu from "./AppComponents/ProfChoicesMenu";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import CreateTeam from "./AppComponents/CreateTeam";
@@ -35,6 +36,7 @@ function App() {
               path="/studentChoicesMenu"
               component={StudentChoicesMenu}
             />
+            <Route exact path="/profChoicesMenu" component={ProfChoicesMenu} />
             <Route exact path="/SetupCourse" component={NewCourse} />
           </div>
         </Router>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class StudentChoicesMenu extends Component {
+class ProfChoicesMenu extends Component {
   render() {
     return (
       <div
@@ -14,24 +14,16 @@ class StudentChoicesMenu extends Component {
         }}
       >
         <Link
-          to="/createteam"
+          to="/SetupCourse"
           style={{ width: "100%", height: "100%" }}
           type="button"
           className="btn btn-secondary btn-lg btn-block"
         >
-          Create Team
+          Set Up Course Parameters
         </Link>
-
-        <button
-          type="button"
-          className="btn btn-secondary disabled btn-lg btn-block"
-          style={{ width: "100%", height: "100%" }}
-        >
-          Join Team
-        </button>
       </div>
     );
   }
 }
 
-export default StudentChoicesMenu;
+export default ProfChoicesMenu;
