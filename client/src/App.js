@@ -10,6 +10,7 @@ import StudentChoicesMenu from "./AppComponents/StudentChoicesMenu";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import CreateTeam from "./AppComponents/CreateTeam";
+import NewCourse from "./AppComponents/NewCourse";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -34,7 +35,7 @@ function App() {
               path="/studentChoicesMenu"
               component={StudentChoicesMenu}
             />
-		    <Route exact path"/SetupCourse" component={NewCourse} />
+            <Route exact path="/SetupCourse" component={NewCourse} />
           </div>
         </Router>
       </ReduxProvider>

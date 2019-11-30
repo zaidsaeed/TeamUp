@@ -4,19 +4,19 @@ import gql from "graphql-tag";
 
 const NEW_COURSE = gql`
   mutation createCourse(
-    $idcoure: String!
+    $idcourse: String!
     $idprof: Int!
     $deadline: Date!
-	$minstudents: Int!
-	$maxstudents: Int!
+    $minstudents: Int!
+    $maxstudents: Int!
   ) {
     createCourse(
       input: {
-		$idcoure: $idcourse
-		$idprof: $idprof
-		$deadline: $deadline
-		$minstudents: $minstudents
-		$maxstudents: $maxstudents
+        idcourse: $idcourse
+        idprof: $idprof
+        deadline: $deadline
+        minstudents: $minstudents
+        maxstudents: $maxstudents
       }
     ) {
       course {
@@ -34,8 +34,8 @@ class newCourse extends Component {
       idcourse: "",
       idprof: 0,
       deadline: "",
-	  minstudent: 0,
-	  maxstudents: 0
+      minstudents: 0,
+      maxstudents: 0
     };
   }
 
@@ -48,7 +48,7 @@ class newCourse extends Component {
   render() {
     return (
       <Mutation mutation={NEW_COURSE}>
-        {(createUser, { data }) => (
+        {(createCourse, { data }) => (
           <div className="register">
             <div className="container">
               <div className="row">
@@ -62,25 +62,25 @@ class newCourse extends Component {
                     onSubmit={e => {
                       e.preventDefault();
                       const newCourse = {
-						idcoure: this.state.idcourse,
-						idprof: parseInt(this.state.idprof),
-						deadline: this.state.deadline,
-						minstudents: parseInt(this.state.minstudents),
-						maxstudents: parseInt(this.state.maxstudents)
+                        idcourse: this.state.idcourse,
+                        idprof: parseInt(this.state.idprof),
+                        deadline: this.state.deadline,
+                        minstudents: parseInt(this.state.minstudents),
+                        maxstudents: parseInt(this.state.maxstudents)
                       };
-                      console.log("newCourse", newUser);
-                      createUser({ variables: newUser });
+                      console.log("newCourse", newCourse);
+                      createCourse({ variables: newCourse });
                     }}
                   >
                     <div className="form-group">
                       <input
                         name="idcourse"
-                        maxLength="5"
+                        maxLength="7"
                         className="form-control form-control-lg"
                         placeholder="Course ID:"
-                        value={this.state.idcourse}
+                        //value={this.state.idcourse}
                         onChange={this.onChange}
-						type="String"
+                        type="String"
                       />
                     </div>
                     <div className="form-group">
@@ -89,41 +89,43 @@ class newCourse extends Component {
                         className="form-control form-control-lg"
                         placeholder="(WILL REMOVE THIS) Prof ID:"
                         name="idprof"
-                        value={this.state.idprof}
+                        //value={this.state.idprof}
                         onChange={this.onChange}
                       />
                     </div>
                     <div className="form-group">
+                      <label>Team Creation Deadline:</label>
                       <input
                         type="Date"
                         className="form-control form-control-lg"
-                        placeholder="User Password:"
+                        placeholder="Team Creation Deadline"
                         name="deadline"
-                        value={this.state.deadline}
+                        //value={this.state.deadline}
                         onChange={this.onChange}
                       />
                     </div>
 
-					<div className="form-group">
+                    <div className="form-group">
                       <input
-                        type="Number
+                        type="Number"
                         className="form-control form-control-lg"
                         placeholder="Minimum Students:"
-                        name="minstudent"
-                        value={this.state.minstudents}
+                        name="minstudents"
+                        //value={this.state.minstudents}
                         onChange={this.onChange}
                       />
                     </div>
-                   
-				   <div className="form-group">
+
+                    <div className="form-group">
                       <input
-                        type="Number
+                        type="Number"
                         className="form-control form-control-lg"
                         placeholder="Maximum Students:"
-                        name="maxstudent"
-                        value={this.state.maxstudents}
+                        name="maxstudents"
+                        //                        value={this.state.maxstudents}
                         onChange={this.onChange}
-
+                      />
+                    </div>
                     <input
                       type="submit"
                       className="btn btn-info btn-block mt-4"
@@ -139,4 +141,4 @@ class newCourse extends Component {
   }
 }
 
-export default graphql(SIGN_UP)(SignUp);
+export default graphql(NEW_COURSE)(newCourse);
