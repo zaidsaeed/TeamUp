@@ -34,6 +34,7 @@ function App() {
               path="/studentChoicesMenu"
               component={StudentChoicesMenu}
             />
+		    <Route exact path"/SetupCourse" component={NewCourse} />
           </div>
         </Router>
       </ReduxProvider>
