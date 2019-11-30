@@ -10,7 +10,7 @@ const NEW_COURSE = gql`
 	$minstudents: Int!
 	$maxstudents: Int!
   ) {
-    createUser(
+    createCourse(
       input: {
 		$idcoure: $idcourse
 		$idprof: $idprof
@@ -19,21 +19,23 @@ const NEW_COURSE = gql`
 		$maxstudents: $maxstudents
       }
     ) {
-      user {
+      course {
         id
-        iduser
+        idcourse
       }
     }
   }
 `;
 
-class SignUp extends Component {
+class newCourse extends Component {
   constructor() {
     super();
     this.state = {
-      iduser: 0,
-      username: "",
-      userpassword: ""
+      idcourse: "",
+      idprof: 0,
+      deadline: "",
+	  minstudent: 0,
+	  maxstudents: 0
     };
   }
 
