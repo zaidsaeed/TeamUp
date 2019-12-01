@@ -7,20 +7,21 @@ import { compose } from "recompose";
 import classnames from "classnames";
 
 const VIEWTEAMS_QUERY = gql`
-  query {
-    allTeams {
-      edges {
-        node {
-          teamname
-          idteam
-          idcourse
-          membersCount
-          createdAt
-          idliason
-        }
-      }
-    }
+  query{
+  allTeams {
+    edges {
+      node {
+        teamname
+        idteam
+        idcourse
+        membersCount
+        createdAt
+        idliason
+        idprof
   }
+}
+}
+}
 `;
 
 class ViewTeams extends Component {
