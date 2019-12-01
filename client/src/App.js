@@ -9,6 +9,7 @@ import Landing from "./AppComponents/Landing";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/store";
 import CreateTeam from "./AppComponents/CreateTeam";
+import ViewTeams from "./AppComponents/ViewTeams";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/navbar" component={Navbar} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/CreateTeam" component={CreateTeam} />
+            <Route exact path="/ViewTeams" component={ViewTeams} />
           </div>
         </Router>
       </ReduxProvider>
