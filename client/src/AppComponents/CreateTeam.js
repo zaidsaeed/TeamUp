@@ -14,7 +14,7 @@ const CREATE_TEAM = gql`
   mutation createTeam(
     $membersCount: Int!
     $teamname:String!
-    $liasonId: Int!
+    $idliason: Int!
     $idteam:Int!
     $idcourse:String!
     $idprof: Int!
@@ -23,7 +23,7 @@ const CREATE_TEAM = gql`
     createTeam(
       input: {
         membersCount: $membersCount
-        liasonId: $liasonId
+        idliason: $idliason
         teamname: $teamname
         idteam: $idteam
         idcourse: $idcourse
@@ -33,7 +33,7 @@ const CREATE_TEAM = gql`
         }
     ) {
       team {
-        liasonId
+        idliason
         membersCount
         teamname
         idteam
@@ -49,7 +49,7 @@ class CreateTeam extends Component {
   constructor() {
     super();
     this.state = {
-        liasonId:"",
+        idliason:"",
         membersCount: "",
         teamname: "",
         idteam: "",
@@ -92,7 +92,7 @@ class CreateTeam extends Component {
                       e.preventDefault();
                       const newTeam = {
                         idcourse:this.state.idcourse,
-                        liasonId: parseInt(this.state.liasonId),
+                        idliason: parseInt(this.state.idliason),
                         membersCount: parseInt(this.state.membersCount),
                         teamname: this.state.teamname,
                         idteam: parseInt(this.state.idteam),
@@ -125,11 +125,11 @@ class CreateTeam extends Component {
                   >
                     <div className="form-group">
                       <input
-                        name="liasonId"
+                        name="idliason"
                         maxLength="9"
                         className="form-control form-control-lg"
                         placeholder="Liason Id:"
-                        value={this.state.liasonId}
+                        value={this.state.idliason}
                         onChange={this.onChange}
                         type="Number"
                       />
