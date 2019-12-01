@@ -6,6 +6,7 @@ from models import db_session, User as UserModel
 from schemas.UserSchema import User, UserConnection, CreateUser
 from schemas.CourseSchema import Course, CourseConnection, CreateCourse
 from schemas.TeamSchema import Team , TeamConnection , CreateTeam
+from schemas.JoinRequestSchema import Request, RequestConnection, CreateRequest
 import utils
 from datetime import datetime
 
@@ -13,7 +14,7 @@ class Mutation(graphene.ObjectType):
     createCourse = CreateCourse.Field()
     createUser = CreateUser.Field()
     createTeam= CreateTeam.Field()
-	
+    createRequest = CreateRequest.Field()
 
 
 class Query(graphene.ObjectType):
@@ -27,6 +28,8 @@ class Query(graphene.ObjectType):
     # all_departments = SQLAlchemyConnectionField(DepartmentConnection, sort=None)
     all_teams = SQLAlchemyConnectionField(TeamConnection)
     team = graphene.relay.Node.Field(Team)
+    all_requests = SQLAlchemyConnectionField(RequestConnection)
+    request = graphene.relay.Node.Field(Request)
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
