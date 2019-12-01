@@ -26,42 +26,57 @@ const VIEWTEAMS_QUERY = gql`
 class ViewTeams extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      TEAMS: VIEWTEAMS_QUERY
-    };
+    // this.state = {
+    //   TEAMS: VIEWTEAMS_QUERY
+    // };
   }
 
-  renderTeam(team) {
-    if (team != null)
-      return (
-        <Card>
-          <CardBody>
-            <CardTitle>{team.teamname}</CardTitle>
-            <CardText>{team.idcourse}</CardText>
-            <CardText>{team.memberscount}</CardText>
-          </CardBody>
-        </Card>
-      );
-    else return <div></div>;
-  }
+  // renderTeam(team) {
+  //   if (team != null)
+  //     return (
+  //       <Card>
+  //         <CardBody>
+  //           <CardTitle>{team.teamname}</CardTitle>
+  //           <CardText>{team.idcourse}</CardText>
+  //           <CardText>{team.memberscount}</CardText>
+  //         </CardBody>
+  //       </Card>
+  //     );
+  //   else return <div></div>;
+  // }
 
   render() {
-    const list = TEAMS.map(team => {
-      return (
-        <div className="col-12 col-md-5 m-1">
-          <Card key={team.idteam}>
-            <CardTitle>{team.teamname}</CardTitle>
-          </Card>
-        </div>
-      );
-    });
+    // const list = TEAMS.map(team => {
+    //   return (
+    //     <div className="col-12 col-md-5 m-1">
+    //       <Card key={team.idteam}>
+    //         <CardTitle>{team.teamname}</CardTitle>
+    //       </Card>
+    //     </div>
+    //   );
+    // });
 
     return (
       <div className="container">
-        <div className="row">{list}</div>
-        <div className="row">
-          <div className="col-12 col-md-5 m-1">{this.renderTeam(team)}</div>
-        </div>
+        <Query query={VIEWTEAMS_QUERY}>
+          {({ loading, error, data }) => {
+            if (loading) {
+              return <h4> Loading </h4>;
+            }
+            if (error) {
+              console.log(error);
+            }
+            console.log("DATA", data);
+
+            // return (
+            //   <Fragment>
+            //     {data.ordered_hotels.map((hotelItem, index) => (
+            //       <HotelItem key={index} hotelItem={hotelItem} />
+            //     ))}
+            //   </Fragment>
+            // );
+          }}
+        </Query>
       </div>
     );
   }
