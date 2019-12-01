@@ -34,11 +34,11 @@ class ViewTeams extends Component {
   renderTeam(team) {
     if (team != null)
       return (
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div className="card text-white bg-primary mb-3" style="max-width: 20rem;">
+          <div className="card-header">{team.node.idteam}</div>
+          <div className="card-body">
+            <h4 className="card-title">{team.node.teamname}</h4>
+            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
         </div>
       );
@@ -68,13 +68,20 @@ class ViewTeams extends Component {
             }
             console.log("DATA", data);
 
-            // return (
-            //   <Fragment>
-            //     {data.ordered_hotels.map((hotelItem, index) => (
-            //       <HotelItem key={index} hotelItem={hotelItem} />
-            //     ))}
-            //   </Fragment>
-            // );
+            
+            
+            
+
+            return (
+              <Fragment>
+                {data.allTeams.edges.map((team) => (
+                  <div>
+                    renderTeam(team);
+                  </div>
+                  <HotelItem key={index} hotelItem={hotelItem} />
+                ))}
+              </Fragment>
+            );
           }}
         </Query>
       </div>
