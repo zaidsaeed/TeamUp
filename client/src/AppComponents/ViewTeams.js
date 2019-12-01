@@ -34,11 +34,22 @@ class ViewTeams extends Component {
   renderTeam(team) {
     if (team != null)
       return (
+<<<<<<< Updated upstream
         <div className="card text-white bg-primary mb-3" style="max-width: 20rem;">
           <div className="card-header">{team.node.idteam}</div>
           <div className="card-body">
             <h4 className="card-title">{team.node.teamname}</h4>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+=======
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h4 class="card-title">Primary card title</h4>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+>>>>>>> Stashed changes
           </div>
         </div>
       );
@@ -72,15 +83,22 @@ class ViewTeams extends Component {
             
             
 
+            // return (
+            //   <Fragment>
+            //     {data.allTeams.edges.map((team) => (
+            //       <div>
+            //         renderTeam(team);
+            //       </div>
+            //       <HotelItem key={index} hotelItem={hotelItem} />
+            //     ))}
+            //   </Fragment>
             return (
-              <Fragment>
-                {data.allTeams.edges.map((team) => (
-                  <div>
-                    renderTeam(team);
-                  </div>
-                  <HotelItem key={index} hotelItem={hotelItem} />
-                ))}
-              </Fragment>
+              <div>
+                {Object.values(data.allTeams.edges).map(
+                  (team, index) => console.log(team.node)
+                  // <HotelItem key={index} hotelItem={hotelItem} />
+                )}
+              </div>
             );
           }}
         </Query>
