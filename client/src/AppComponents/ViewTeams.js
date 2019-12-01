@@ -26,30 +26,21 @@ const VIEWTEAMS_QUERY = gql`
 class ViewTeams extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   TEAMS: VIEWTEAMS_QUERY
-    // };
+    
   }
 
   renderTeam(team) {
     if (team != null)
       return (
-<<<<<<< Updated upstream
-        <div className="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <div className="card-header">{team.node.idteam}</div>
-          <div className="card-body">
-            <h4 className="card-title">{team.node.teamname}</h4>
-            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-=======
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
->>>>>>> Stashed changes
+        <div style={{float:'left'}}>
+          <div className="card text-white bg-primary mb-3" style={{ maxWidth: "20rem"}}>
+            <div className="card-header" >Team ID: {team.node.idteam}</div>
+            <div className="card-body">
+              <h3 className="card-title">{team.node.teamname}</h3>
+              <h6 className="card-title">{team.node.idcourse}</h6>
+              <p className="card-text">Maximum number of students is: {team.node.membersCount}</p>
+
+            </div>
           </div>
         </div>
       );
@@ -57,15 +48,7 @@ class ViewTeams extends Component {
   }
 
   render() {
-    // const list = TEAMS.map(team => {
-    //   return (
-    //     <div className="col-12 col-md-5 m-1">
-    //       <Card key={team.idteam}>
-    //         <CardTitle>{team.teamname}</CardTitle>
-    //       </Card>
-    //     </div>
-    //   );
-    // });
+    
 
     return (
       <div className="container">
@@ -80,23 +63,12 @@ class ViewTeams extends Component {
             console.log("DATA", data);
 
             
-            
-            
 
-            // return (
-            //   <Fragment>
-            //     {data.allTeams.edges.map((team) => (
-            //       <div>
-            //         renderTeam(team);
-            //       </div>
-            //       <HotelItem key={index} hotelItem={hotelItem} />
-            //     ))}
-            //   </Fragment>
             return (
-              <div>
+              <div style={{marginTop: "30px"}}>
                 {Object.values(data.allTeams.edges).map(
-                  (team, index) => console.log(team.node)
-                  // <HotelItem key={index} hotelItem={hotelItem} />
+                  (team, index) => this.renderTeam(team)
+                  
                 )}
               </div>
             );
@@ -108,4 +80,4 @@ class ViewTeams extends Component {
 }
 export default ViewTeams;
 
-// export default graphql(VIEWTEAMS_QUERY)(ViewTeams);
+
