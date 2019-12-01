@@ -37,6 +37,7 @@ class JoinRequest extends Component {
           <div className="card text-white bg-success mb-3" >
             <div className="card-header" >Team ID: {team.node.idteam}</div>
             <div className="card-body">
+              <button type="submit" class="btn btn-secondary my-2 my-sm-0" style={{float:'right'}}>Request to join team</button>
               <h3 className="card-title">{team.node.teamname}</h3>
               <h6 className="card-title">{team.node.idcourse}</h6>
               <p className="card-text">Maximum number of students is: {team.node.membersCount}</p>
