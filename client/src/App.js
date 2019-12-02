@@ -13,7 +13,8 @@ import CreateTeam from "./AppComponents/CreateTeam";
 import NewCourse from "./AppComponents/NewCourse";
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql"
+  uri:
+    "http://a527b36b714c311eab5230ade9b74846-134641911.us-west-2.elb.amazonaws.com:4444/graphql"
 });
 
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
