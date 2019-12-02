@@ -7,6 +7,7 @@ from models import db_session
 from schema import schema
 
 app = Flask(__name__)
+
 CORS(app)
 app.debug = True
 
@@ -24,4 +25,4 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=4444)

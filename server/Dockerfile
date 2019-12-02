@@ -21,6 +21,6 @@ COPY . /app
 # ports: 
 #     - "5000:5000"
 
-EXPOSE 5000:5000
+EXPOSE 4444:4444
 
 CMD [  "pipenv", "run", "python", "app.py" ]
