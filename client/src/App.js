@@ -13,7 +13,7 @@ import configureStore from "./redux/store";
 import CreateTeam from "./AppComponents/CreateTeam";
 import ViewTeams from "./AppComponents/ViewTeams";
 import NewCourse from "./AppComponents/NewCourse";
-import NewRequest from "./AppComponents/JoinRequest";
+import JoinRequest from "./AppComponents/JoinRequest";
 
 
 const client = new ApolloClient({
@@ -38,7 +38,7 @@ function App() {
             <Route exact path="/studentChoicesMenu"component={StudentChoicesMenu}/>
             <Route exact path="/profChoicesMenu" component={ProfChoicesMenu} />
             <Route exact path="/SetupCourse" component={NewCourse} />
-            <Route exact path="/JoinRequest" component={NewRequest} />
+            <Route exact path="/JoinRequest" component={JoinRequest} />
           </div>
         </Router>
       </ReduxProvider>
