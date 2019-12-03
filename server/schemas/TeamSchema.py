@@ -19,14 +19,14 @@ class TeamAttribute:
     
 
 
-class Team(SQLAlchemyObjectType, TeamAttribute):
+class TeamSchema(SQLAlchemyObjectType, TeamAttribute):
     class Meta:
         model = TeamModel
         interfaces = (relay.Node, )
 
 class TeamConnection(relay.Connection):
     class Meta:
-        node = Team
+        node = TeamSchema
 
 class CreateTeamInput(graphene.InputObjectType, TeamAttribute):
     """Arguments to create a Team."""
@@ -34,13 +34,17 @@ class CreateTeamInput(graphene.InputObjectType, TeamAttribute):
 
 class CreateTeam(graphene.Mutation):
     """Mutation to create a Team."""
-    team = graphene.Field(lambda: Team, description="Team created by this mutation.")
+    team = graphene.Field(lambda: TeamSchema, description="Team created by this mutation.")
 
     class Arguments:
         input = CreateTeamInput(required=True)
 
     def mutate(self, info, input):
-        data = utils.input_to_dictionary(input)
+        data = input
+        data["id"] = data.idteam
+        del data['idteam']
+        print(data)
+        # data = utils.input_to_dictionary(input)
         # data['created'] = datetime.utcnow()
         # data['edited'] = datetime.utcnow()
 

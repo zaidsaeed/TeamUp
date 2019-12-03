@@ -10,17 +10,17 @@ class UserAttribute:
     iduser = graphene.Int(description="ID OF USER")
     username = graphene.String(description="UserName of the Student.")
     userpassword = graphene.String(description="Password of the student.")
-    usertype = graphene.String(description="Is user student or teacher")
+    usert = graphene.String(description="Is user student or teacher")
 
 
-class User(SQLAlchemyObjectType, UserAttribute):
+class UserSchema(SQLAlchemyObjectType, UserAttribute):
     class Meta:
         model = UserModel
         interfaces = (relay.Node, )
 
 class UserConnection(relay.Connection):
     class Meta:
-        node = User
+        node = UserSchema
 
 class CreateUserInput(graphene.InputObjectType, UserAttribute):
     """Arguments to create a person."""
@@ -28,7 +28,7 @@ class CreateUserInput(graphene.InputObjectType, UserAttribute):
 
 class CreateUser(graphene.Mutation):
     """Mutation to create a person."""
-    user = graphene.Field(lambda: User, description="Person created by this mutation.")
+    user = graphene.Field(lambda: UserSchema, description="Person created by this mutation.")
 
     class Arguments:
         input = CreateUserInput(required=True)
@@ -36,7 +36,11 @@ class CreateUser(graphene.Mutation):
     def mutate(self, info, input):
         print("input")
         print(input)
-        data = utils.input_to_dictionary(input)
+        data = input
+        data["id"] = data.iduser
+        del data['iduser']
+        print(data)
+        # data = utils.input_to_dictionary(input)
         # data['created'] = datetime.utcnow()
         # data['edited'] = datetime.utcnow()
         print("data")
