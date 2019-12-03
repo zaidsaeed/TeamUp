@@ -23,7 +23,8 @@ const LOGIN_QUERY = gql`
       iduser
       username
       userpassword
-      usertype
+      usert
+      id
     }
   }
 `;
@@ -46,7 +47,7 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    var text = "User:";
+    var text = "UserSchema:";
     text = text.concat(this.state.idNumber);
     var bytes = utf8.encode(text);
     var encoded = base64.encode(bytes);
@@ -60,13 +61,14 @@ class Login extends Component {
         variables: userData
       })
       .then(data => {
+        console.log(data);
         const user = data.data.user;
-        console.log(this.props);
+
         if (user.userpassword == this.state.password) {
           window.localStorage.setItem("user", JSON.stringify(data.data));
           this.props.addUser(user);
 
-          if (user.usertype === "S") {
+          if (user.usert === "S") {
             this.props.history.push("/studentChoicesMenu");
           } else {
             this.props.history.push("/teacherChoicesMenu");
@@ -80,6 +82,7 @@ class Login extends Component {
         }
       })
       .catch(err => {
+        console.log(err);
         this.setState({
           errors: {
             idNumber: "The idNumber you entered is incorrect"

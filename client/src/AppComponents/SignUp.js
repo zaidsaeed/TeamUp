@@ -22,7 +22,7 @@ const SIGN_UP = gql`
         iduser: $iduser
         username: $username
         userpassword: $userpassword
-        usertype: $usertype
+        usert: $usertype
       }
     ) {
       user {
@@ -30,7 +30,7 @@ const SIGN_UP = gql`
         iduser
         username
         userpassword
-        usertype
+        usert
       }
     }
   }
@@ -92,10 +92,10 @@ class SignUp extends Component {
                           );
                           this.props.addUser(data.data.createUser.user);
                           console.log(data);
-                          if (data.data.createUser.user.usertype === "S") {
+                          if (data.data.createUser.user.usert === "S") {
                             this.props.history.push("/studentChoicesMenu");
                           } else {
-                            this.props.history.push("/teacherChoicesMenu");
+                            this.props.history.push("/profChoicesMenu");
                           }
                         })
                         .catch(err => {
