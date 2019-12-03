@@ -37,7 +37,7 @@ class User(Base):
     userpassword = Column(String)
     usert = Column(String)
     teams = relationship('Team', secondary=association_table)
-    requests = relationship("Team_Join_Request")
+    # requests = relationship("Team_Join_Request")
 
 class Course(Base):
 	__tablename__ = 'courses'
@@ -59,10 +59,10 @@ class Team(Base):
     members_count = Column(Integer)
 
 class Team_Join_Request(Base):
-	__tablename__ = "team_join_requests"
-	idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
-	idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
-	idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
-    team = relationship("Team")
-	idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
+    __tablename__ = "team_join_requests"
+    idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
+    idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
+    idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
+    # team = relationship('Team')
+    idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
      
