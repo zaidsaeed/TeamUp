@@ -27,6 +27,8 @@ association_table = Table('team_student_assoc', Base.metadata,
     Column('iduser', Integer, ForeignKey('users.iduser'))
 )
 
+# req_assoc_table = Table('team_join_requests', Base.metadata, Column(), Column())
+
 class User(Base):
     __tablename__ = 'users'
     id = Column('iduser', Integer, primary_key=True)
@@ -35,6 +37,7 @@ class User(Base):
     userpassword = Column(String)
     usert = Column(String)
     teams = relationship('Team', secondary=association_table)
+    requests = relationship("Team_Join_Request")
 
 class Course(Base):
 	__tablename__ = 'courses'
@@ -60,4 +63,6 @@ class Team_Join_Request(Base):
 	idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
 	idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
 	idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
+    team = relationship("Team")
 	idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
+     

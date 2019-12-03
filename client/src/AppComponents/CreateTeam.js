@@ -13,10 +13,10 @@ import { connect } from "react-redux";
 const CREATE_TEAM = gql`
   mutation createTeam(
     $membersCount: Int!
-    $teamname:String!
+    $teamname: String!
     $idliason: Int!
-    $idteam:Int!
-    $idcourse:String!
+    $idteam: Int!
+    $idcourse: String!
     $idprof: Int!
     $createdAt: Date!
   ) {
@@ -29,8 +29,7 @@ const CREATE_TEAM = gql`
         idcourse: $idcourse
         idprof: $idprof
         createdAt: $createdAt
-        
-        }
+      }
     ) {
       team {
         idliason
@@ -49,14 +48,14 @@ class CreateTeam extends Component {
   constructor() {
     super();
     this.state = {
-        idliason:"",
-        membersCount: "",
-        teamname: "",
-        idteam: "",
-        idcourse:"", 
-        idprof: "",
-        createdAt:"", 
-        errors: ""
+      idliason: "",
+      membersCount: "",
+      teamname: "",
+      idteam: "",
+      idcourse: "",
+      idprof: "",
+      createdAt: "",
+      errors: ""
     };
   }
 
@@ -66,15 +65,7 @@ class CreateTeam extends Component {
     });
   };
 
-//   setType = type => {
-//     this.setState({
-//       usertype: type
-//     });
-//     console.log(type);
-//   };
-
   render() {
-      console.log(this.props)
     return (
       <Mutation mutation={CREATE_TEAM}>
         {(createTeam, { data }) => (
@@ -83,15 +74,13 @@ class CreateTeam extends Component {
               <div className="row">
                 <div className="col-md-8 m-auto">
                   <h1 className="display-4 text-center">Create Team</h1>
-                  <p className="lead text-center">
-                    Create your Team 
-                  </p>
+                  <p className="lead text-center">Create your Team</p>
                   <form
                     noValidate
                     onSubmit={e => {
                       e.preventDefault();
                       const newTeam = {
-                        idcourse:this.state.idcourse,
+                        idcourse: this.state.idcourse,
                         idliason: parseInt(this.state.idliason),
                         membersCount: parseInt(this.state.membersCount),
                         teamname: this.state.teamname,
@@ -103,14 +92,15 @@ class CreateTeam extends Component {
                       createTeam({ variables: newTeam })
                         .then(data => {
                           console.log(data);
-                          
-                        //   this.props.addTeam(data.data.createTeam.team);
-                        //   console.log(data);
-                        //   if (data.data.createUser.user.usertype === "S") {
-                        //     this.props.history.push("/studentChoicesMenu");
-                        //   } else {
-                        //     this.props.history.push("/teacherChoicesMenu");
-                        //   }
+                          this.props.history.push("/studentChoicesMenu");
+
+                          //   this.props.addTeam(data.data.createTeam.team);
+                          //   console.log(data);
+                          //   if (data.data.createUser.user.usertype === "S") {
+                          //     this.props.history.push("/studentChoicesMenu");
+                          //   } else {
+                          //     this.props.history.push("/teacherChoicesMenu");
+                          //   }
                         })
                         .catch(err => {
                           console.log("failure");
