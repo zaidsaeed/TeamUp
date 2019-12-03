@@ -38,3 +38,25 @@ class CreateRequest(graphene.Mutation):
 		db_session.add(request)
 		db_session.commit()
 		return CreateRequest(request=request)
+
+class DeleteRequestInput(graphene.InputObjectType):
+    """Arguments to delete an employee."""
+    id = graphene.ID(required=True, description="Global Id of the employee.")
+
+
+class DeleteRequest(graphene.Mutation):
+    """Delete a request."""
+    ok = graphene.Boolean()
+
+    class Arguments:
+        input = DeleteRequestInput(required=True)
+
+    def mutate(self, info, input):
+        data = utils.input_to_dictionary(input)
+
+        employee = db_session.query(
+            RequestModel).filter_by(id=data['id'])
+        employee.delete(data['id'])
+        db_session.commit()
+
+        return DeleteRequest(ok = True)

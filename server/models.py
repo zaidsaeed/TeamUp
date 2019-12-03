@@ -45,3 +45,14 @@ class Team_Join_Request(Base):
 	idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
 	idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
 	idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
+
+class Email(Base):
+	__tablename__ = "dummy"
+	email = Column(String, primary_key=True)
+	idteam = Column(Integer, primary_key=True)
+	idcourse = Column(String)
+
+class Team_Student_Assoc(Base):
+	__tablename__ = "team_student_assoc"
+	idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
+	iduser = Column(Integer, ForeignKey('users.iduser'), primary_key=True)

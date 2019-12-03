@@ -6,15 +6,24 @@ from models import db_session, User as UserModel
 from schemas.UserSchema import User, UserConnection, CreateUser
 from schemas.CourseSchema import Course, CourseConnection, CreateCourse
 from schemas.TeamSchema import Team , TeamConnection , CreateTeam
-from schemas.JoinRequestSchema import Request, RequestConnection, CreateRequest
+from schemas.JoinRequestSchema import Request, RequestConnection, CreateRequest, DeleteRequest
+from schemas.Email import Email, EmailConnection, CreateEmail
+from schemas.TeamMemberSchema import Member, MemberConnection, CreateMember
 import utils
 from datetime import datetime
+
+def SendEmail(email):
+   raise Exception('The value of email was: {}'.format(email))
 
 class Mutation(graphene.ObjectType):
     createCourse = CreateCourse.Field()
     createUser = CreateUser.Field()
     createTeam= CreateTeam.Field()
     createRequest = CreateRequest.Field()
+    createEmail = CreateEmail.Field()
+    createMember = CreateMember.Field()
+    deleteRequest = DeleteRequest.Field()
+
 
 
 class Query(graphene.ObjectType):
