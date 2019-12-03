@@ -21,14 +21,14 @@ class StudentChoicesMenu extends Component {
         >
           Create Team
         </Link>
-
-        <button
-          type="button"
-          className="btn btn-secondary disabled btn-lg btn-block"
+        <Link
+          to="/joinrequest"
           style={{ width: "100%", height: "100%" }}
+          type="button"
+          className="btn btn-secondary btn-lg btn-block"
         >
           Join Team
-        </button>
+        </Link>
       </div>
     );
   }
