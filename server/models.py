@@ -14,12 +14,30 @@ Base = declarative_base()
 # We will need this for querying
 Base.query = db_session.query_property()
 
+# class Team_Student_Assoc(Base):
+#     __tablename__ = "team_student_assoc"
+#     idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
+#     idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
+#     idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
+#     iduser = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
+
+
+association_table = Table('team_student_assoc', Base.metadata,
+    Column('idteam', Integer, ForeignKey('teams.idteam')),
+    Column('iduser', Integer, ForeignKey('users.iduser'))
+)
+
+# req_assoc_table = Table('team_join_requests', Base.metadata, Column(), Column())
+
 class User(Base):
     __tablename__ = 'users'
-    iduser = Column( Integer, primary_key=True) #make sure no column names end with the letters "id"
+    id = Column('iduser', Integer, primary_key=True)
+    # iduser = Column( Integer) #make sure no column names end with the letters "id"
     username = Column(String)
     userpassword = Column(String)
-    usertype = Column(String)
+    usert = Column(String)
+    teams = relationship('Team', secondary=association_table)
+    requests = relationship("Team_Join_Request")
 
 class Course(Base):
 	__tablename__ = 'courses'
@@ -32,11 +50,12 @@ class Course(Base):
 class Team(Base):
     __tablename__ = 'teams'
     idliason=Column(Integer)
-    idteam=Column(Integer, primary_key=True)
-    idprof = Column(Integer, primary_key=True)
-    idcourse = Column(String, primary_key=True)
+    id = Column('idteam', Integer, primary_key=True)
+    idprof = Column(Integer)
+    idcourse = Column(String)
     teamname= Column(String)
     created_at = Column(Integer)
+    users = relationship(User, secondary=association_table)
     members_count = Column(Integer)
 
 class Team_Join_Request(Base):
@@ -44,4 +63,6 @@ class Team_Join_Request(Base):
 	idteam = Column(Integer, ForeignKey('teams.idteam'), primary_key=True)
 	idprof = Column(Integer, ForeignKey('teams.idprof'), primary_key=True)
 	idcourse = Column(String, ForeignKey('teams.idcourse'), primary_key=True)
+    team = relationship("Team")
 	idstudent = Column(Integer, ForeignKey('users.iduser'), primary_key=True)
+     

@@ -9,6 +9,7 @@ class RequestAttribute:
 	idprof = graphene.Int()
 	idcourse = graphene.String()
 	idstudent = graphene.Int()
+	idliason = graphene.Int()
 
 class Request(SQLAlchemyObjectType, RequestAttribute):
 	class Meta:

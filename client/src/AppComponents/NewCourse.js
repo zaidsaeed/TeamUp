@@ -70,6 +70,7 @@ class newCourse extends Component {
                       };
                       console.log("newCourse", newCourse);
                       createCourse({ variables: newCourse });
+                      this.props.history.push("/profChoicesMenu");
                     }}
                   >
                     <div className="form-group">
