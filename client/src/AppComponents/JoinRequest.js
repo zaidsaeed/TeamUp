@@ -7,9 +7,13 @@ import { compose } from "recompose";
 import classnames from "classnames";
 import NewCourse from "./NewCourse";
 
-
-const STUDENT= window.localStorage.getItem("user");
-const IDSTUDENT= JSON.parse(STUDENT).user.iduser;
+const STUDENT = "none";
+const IDSTUDENT = "none";
+if (!(window.localStorage.getItem("user") === null)){
+} else {
+	STUDENT= window.localStorage.getItem("user");
+	IDSTUDENT= JSON.parse(STUDENT).user.iduser;
+}
 
 
 const VIEWTEAMS_QUERY = gql`
