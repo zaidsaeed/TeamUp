@@ -6,7 +6,8 @@
   "scripts": {
     "server": "./startserver.sh",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy": "gh-pages -d client"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,9 @@
   "bugs": {
     "url": "https://github.com/ahmedGhub/TeamUp/issues"
   },
-  "homepage": "https://github.com/ahmedGhub/TeamUp#readme",
+  "homepage": "https://ahmedGhub.github.io/TeamUp",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "concurrently": "^5.0.0",
+    "gh-pages": "^2.1.1"
   }
 }
