@@ -17,6 +17,14 @@ const SEND_EMAIL = gql`
   }
 `;
 
+const DELETE_REQ = gql`
+  mutation deleteRequest($idrequest: Int!) {
+    deleteRequest(input: { idrequest: $idrequest }) {
+      ok
+    }
+  }
+`;
+
 const ADD_MEMBER = gql`
   mutation createMember($idteam: Int!, $iduser: Int!) {
     createMember(input: { idteam: $idteam, iduser: $iduser }) {
@@ -29,7 +37,7 @@ const ADD_MEMBER = gql`
 `;
 
 class Requests extends Component {
-  renderRequest(request) {
+  renderRequest(request, index) {
     console.log(request);
     return (
       <tr>
@@ -38,18 +46,41 @@ class Requests extends Component {
           <button
             type="button"
             class="btn btn-primary"
-            onClick={() =>
+            onClick={() => {
               this.props.client.mutate({
                 mutation: ADD_MEMBER,
                 variables: { idteam: request.idteam, iduser: request.idstudent }
-              })
-            }
+              });
+              this.props.client.mutate({
+                mutation: DELETE_REQ,
+                variables: { idrequest: request.id }
+              });
+              var user = JSON.parse(window.localStorage.getItem("user")).user;
+              user.requests.splice(index, 1);
+              user = { user: user };
+              window.localStorage.setItem("user", JSON.stringify(user));
+              this.props.updateState(user.user.requests);
+            }}
           >
             Accept
           </button>
         </td>
         <td>
-          <button type="button" class="btn btn-secondary">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onClick={() => {
+              this.props.client.mutate({
+                mutation: DELETE_REQ,
+                variables: { idrequest: request.id }
+              });
+              var user = JSON.parse(window.localStorage.getItem("user")).user;
+              user.requests.splice(index, 1);
+              user = { user: user };
+              window.localStorage.setItem("user", JSON.stringify(user));
+              this.props.updateState(user.user.requests);
+            }}
+          >
             Reject
           </button>
         </td>
@@ -70,7 +101,9 @@ class Requests extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.requests.map(request => this.renderRequest(request))}
+            {this.props.requests.map((request, index) =>
+              this.renderRequest(request, index)
+            )}
           </tbody>
         </table>
       </div>

@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Requests from "./Requests";
 import { withApollo } from "react-apollo";
+import { request } from "http";
 
 class StudentChoicesMenu extends Component {
-  render() {
+  constructor() {
+    super();
     const student = JSON.parse(window.localStorage.getItem("user")).user;
+    console.log("student is here", student);
+    this.state = {
+      requests: student ? student.requests : []
+    };
+  }
+  render() {
     return (
       <div
         className="w-50 mx-auto"
@@ -16,8 +24,13 @@ class StudentChoicesMenu extends Component {
           display: "flex"
         }}
       >
-        {student && student.requests.length > 0 ? (
-          <Requests requests={student.requests} />
+        {this.state.requests.length > 0 ? (
+          <Requests
+            requests={this.state.requests}
+            updateState={newRequests => {
+              this.setState({ requests: newRequests });
+            }}
+          />
         ) : (
           ""
         )}

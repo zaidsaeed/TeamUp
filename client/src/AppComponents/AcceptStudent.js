@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
 
- const SEND_EMAIL = gql`
-  mutation createEmail(
-    $email: String!
-    $idteam: Int!
-    $idcourse: String!
-  ) {
+const SEND_EMAIL = gql`
+  mutation createEmail($email: String!, $idteam: Int!, $idcourse: String!) {
     createEmail(
-      input: {
-        email: $email
-        idteam: $idteam
-        idcourse: $idcourse
-      }
+      input: { email: $email, idteam: $idteam, idcourse: $idcourse }
     ) {
       course {
         id
@@ -24,45 +16,32 @@ import gql from "graphql-tag";
   }
 `;
 const ADD_MEMBER = gql`
-  mutation createMember(
-    $idteam: Int!
-    $iduser: Int!
-  ) {
-    createMember(
-      input: {
-        idteam: $idteam
-        iduser: $iduser
-      }
-    ) {
+  mutation createMember($idteam: Int!, $iduser: Int!) {
+    createMember(input: { idteam: $idteam, iduser: $iduser }) {
       member {
         id
         idteam
-		iduser
+        iduser
       }
     }
   }
 `;
 
-
- 
-
 class AcceptStudent extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-		email: ""
+      email: ""
     };
   }
-  
+
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
-
- render() {
- 
+  render() {
     return (
       <div
         className="w-50 mx-auto"
@@ -72,20 +51,20 @@ class AcceptStudent extends Component {
           alignItems: "center",
           display: "flex"
         }}
-      > 
-	     <input
-		   type="String"
-		   className="form-control form-control-lg"
-		   placeholder="email"
-		   name="email"
-		   onChange={this.onChange}
-		/>
+      >
+        <input
+          type="String"
+          className="form-control form-control-lg"
+          placeholder="email"
+          name="email"
+          onChange={this.onChange}
+        />
 
         <button
           style={{ width: "100%", height: "100%" }}
           type="button"
           className="btn btn-secondary btn-lg btn-block"
-		  onClick={this.send}
+          onClick={this.send}
         >
           Send email
         </button>
