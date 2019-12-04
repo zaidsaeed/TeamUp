@@ -60,6 +60,10 @@ class Requests extends Component {
               user = { user: user };
               window.localStorage.setItem("user", JSON.stringify(user));
               this.props.updateState(user.user.requests);
+              this.props.client.mutate({
+                mutation: SEND_EMAIL,
+                variables: {}
+              });
             }}
           >
             Accept
