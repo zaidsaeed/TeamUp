@@ -1,13 +1,50 @@
 import React, { Component } from "react";
+import { withApollo } from "react-apollo";
+import gql from "graphql-tag";
 
-export default class Requests extends Component {
+const SEND_EMAIL = gql`
+  mutation createEmail($email: String!, $idteam: Int!, $idcourse: String!) {
+    createEmail(
+      input: { email: $email, idteam: $idteam, idcourse: $idcourse }
+    ) {
+      course {
+        id
+        email
+        idteam
+        idcourse
+      }
+    }
+  }
+`;
+
+const ADD_MEMBER = gql`
+  mutation createMember($idteam: Int!, $iduser: Int!) {
+    createMember(input: { idteam: $idteam, iduser: $iduser }) {
+      member {
+        idteam
+        iduser
+      }
+    }
+  }
+`;
+
+class Requests extends Component {
   renderRequest(request) {
     console.log(request);
     return (
       <tr>
         <th scope="row">{request.idstudent}</th>
         <td>
-          <button type="button" class="btn btn-primary">
+          <button
+            type="button"
+            class="btn btn-primary"
+            onClick={() =>
+              this.props.client.mutate({
+                mutation: ADD_MEMBER,
+                variables: { idteam: request.idteam, iduser: request.idstudent }
+              })
+            }
+          >
             Accept
           </button>
         </td>
@@ -19,6 +56,7 @@ export default class Requests extends Component {
       </tr>
     );
   }
+
   render() {
     return (
       <div style={{ marginTop: "10px" }}>
@@ -39,3 +77,5 @@ export default class Requests extends Component {
     );
   }
 }
+
+export default withApollo(Requests);

@@ -16,7 +16,6 @@ import NewCourse from "./AppComponents/NewCourse";
 import JoinRequest from "./AppComponents/JoinRequest";
 import AcceptStudent from "./AppComponents/AcceptStudent";
 
-
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
 });
@@ -36,11 +35,15 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/CreateTeam" component={CreateTeam} />
             <Route exact path="/ViewTeams" component={ViewTeams} />
-            <Route exact path="/studentChoicesMenu"component={StudentChoicesMenu}/>
+            <Route
+              exact
+              path="/studentChoicesMenu"
+              component={StudentChoicesMenu}
+            />
             <Route exact path="/profChoicesMenu" component={ProfChoicesMenu} />
             <Route exact path="/SetupCourse" component={NewCourse} />
             <Route exact path="/JoinRequest" component={JoinRequest} />
-			<Route exact path="/AcceptStudent" component={AcceptStudent} />
+            <Route exact path="/AcceptStudent" component={AcceptStudent} />
           </div>
         </Router>
       </ReduxProvider>

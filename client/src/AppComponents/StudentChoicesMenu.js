@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Requests from "./Requests";
+import { withApollo } from "react-apollo";
 
 class StudentChoicesMenu extends Component {
   render() {
     const student = JSON.parse(window.localStorage.getItem("user")).user;
-    // var requests;
-    // if (student && student.requests.length > 0) {
-    //   requests =
-    // }
     return (
       <div
         className="w-50 mx-auto"
@@ -45,4 +42,4 @@ class StudentChoicesMenu extends Component {
   }
 }
 
-export default StudentChoicesMenu;
+export default withApollo(StudentChoicesMenu);
