@@ -5,7 +5,7 @@ from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
 from models import db_session, User as UserModel
 from schemas.UserSchema import UserSchema, UserConnection, CreateUser
 from schemas.CourseSchema import Course, CourseConnection, CreateCourse
-from schemas.TeamSchema import Team , TeamConnection , CreateTeam
+from schemas.TeamSchema import TeamSchema , TeamConnection , CreateTeam
 from schemas.JoinRequestSchema import Request, RequestConnection, CreateRequest, DeleteRequest
 from schemas.Email import Email, EmailConnection, CreateEmail
 from schemas.TeamMemberSchema import Member, MemberConnection, CreateMember

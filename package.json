@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ahmedGhub/TeamUp#readme",
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "concurrently": "^5.0.0",
+    "gh-pages": "^2.1.1"
   }
 }
