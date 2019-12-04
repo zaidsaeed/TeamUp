@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Requests from "./Requests";
 
 class StudentChoicesMenu extends Component {
   render() {
+    const student = JSON.parse(window.localStorage.getItem("user")).user;
+    // var requests;
+    // if (student && student.requests.length > 0) {
+    //   requests =
+    // }
     return (
       <div
         className="w-50 mx-auto"
@@ -13,6 +19,11 @@ class StudentChoicesMenu extends Component {
           display: "flex"
         }}
       >
+        {student && student.requests.length > 0 ? (
+          <Requests requests={student.requests} />
+        ) : (
+          ""
+        )}
         <Link
           to="/createteam"
           style={{ width: "100%", height: "100%" }}
