@@ -25,6 +25,11 @@ const LOGIN_QUERY = gql`
       userpassword
       usert
       id
+      requests {
+        id
+        idteam
+        idstudent
+      }
     }
   }
 `;
