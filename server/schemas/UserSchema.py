@@ -11,6 +11,7 @@ class UserAttribute:
     username = graphene.String(description="UserName of the Student.")
     userpassword = graphene.String(description="Password of the student.")
     usert = graphene.String(description="Is user student or teacher")
+    email = graphene.String(description="email of user")
 
 
 class UserSchema(SQLAlchemyObjectType, UserAttribute):

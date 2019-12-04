@@ -50,6 +50,7 @@ class User(Base):
     usert = Column(String)
     teams = relationship('Team', secondary=association_table)
     requests = relationship('Team_Join_Request', foreign_keys='[Team_Join_Request.idliason]')
+    email = Column(String)
 
 class Course(Base):
 	__tablename__ = 'courses'

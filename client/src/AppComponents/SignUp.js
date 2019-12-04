@@ -16,6 +16,7 @@ const SIGN_UP = gql`
     $username: String!
     $userpassword: String!
     $usertype: String!
+    $email: String!
   ) {
     createUser(
       input: {
@@ -23,6 +24,7 @@ const SIGN_UP = gql`
         username: $username
         userpassword: $userpassword
         usert: $usertype
+        email: $email
       }
     ) {
       user {
@@ -31,6 +33,7 @@ const SIGN_UP = gql`
         username
         userpassword
         usert
+        email
         requests {
           id
           idteam
@@ -49,7 +52,8 @@ class SignUp extends Component {
       username: "",
       userpassword: "",
       usertype: "",
-      errors: ""
+      errors: "",
+	  email: ""
     };
   }
 
@@ -86,7 +90,8 @@ class SignUp extends Component {
                         iduser: parseInt(this.state.iduser),
                         username: this.state.username,
                         userpassword: this.state.userpassword,
-                        usertype: this.state.usertype
+                        usertype: this.state.usertype,
+						email: this.state.email
                       };
                       console.log("newUser", newUser);
                       createUser({ variables: newUser })
@@ -114,7 +119,19 @@ class SignUp extends Component {
                         });
                     }}
                   >
+				  <div className="form-group">
+                      <input
+                        name="email"
+                        className="form-control form-control-lg"
+                        placeholder="Email (gmail only):"
+                        value={this.state.email}
+                        onChange={this.onChange}
+                        type="String"
+                      />
+                    </div>
+
                     <div className="form-group">
+                      <label>User ID:</label>
                       <input
                         name="iduser"
                         maxLength="9"
