@@ -6,8 +6,6 @@ import utils
 
 class RequestAttribute:
 	idteam = graphene.Int()
-	idprof = graphene.Int()
-	idcourse = graphene.String()
 	idstudent = graphene.Int()
 	idliason = graphene.Int()
 
@@ -32,7 +30,8 @@ class CreateRequest(graphene.Mutation):
 	def mutate(self, info, input):
 		print("input")
 		print(input)
-		data = utils.input_to_dictionary(input)
+		data = input
+		# data["id"] = data.idrequest
 		print("data")
 		print(data)
 		request = RequestModel(**data)

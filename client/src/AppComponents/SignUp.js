@@ -31,6 +31,11 @@ const SIGN_UP = gql`
         username
         userpassword
         usert
+        requests {
+          id
+          idteam
+          idstudent
+        }
       }
     }
   }
@@ -88,7 +93,7 @@ class SignUp extends Component {
                         .then(data => {
                           window.localStorage.setItem(
                             "user",
-                            JSON.stringify(data.data.createUser.user)
+                            JSON.stringify(newUser)
                           );
                           this.props.addUser(data.data.createUser.user);
                           console.log(data);

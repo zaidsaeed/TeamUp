@@ -29,19 +29,9 @@ const VIEWTEAMS_QUERY = gql`
 `;
 
 const NEW_REQUEST = gql`
-  mutation createRequest(
-    $idteam: Int!
-    $idprof: Int!
-    $idcourse: String!
-    $idstudent: Int!
-  ) {
+  mutation createRequest($idteam: Int!, $idliason: Int!, $idstudent: Int!) {
     createRequest(
-      input: {
-        idteam: $idteam
-        idprof: $idprof
-        idcourse: $idcourse
-        idstudent: $idstudent
-      }
+      input: { idteam: $idteam, idliason: $idliason, idstudent: $idstudent }
     ) {
       request {
         idteam
@@ -63,8 +53,7 @@ class JoinRequest extends Component {
     var studentId = JSON.parse(window.localStorage.getItem("user")).user.id;
     const REQUEST = {
       idteam: utf8.decode(base64.decode(team.id)).replace("TeamSchema:", ""),
-      idprof: team.idprof,
-      idcourse: team.idcourse,
+      idliason: team.idliason,
       idstudent: utf8
         .decode(base64.decode(studentId))
         .replace("UserSchema:", "")
