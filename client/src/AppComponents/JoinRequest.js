@@ -29,9 +29,9 @@ const VIEWTEAMS_QUERY = gql`
 `;
 
 const NEW_REQUEST = gql`
-  mutation createRequest($idteam: Int!, $idliason: Int!, $idstudent: Int!) {
+  mutation createRequest($idteam: Int!, $idliason: Int!, $idstudent: Int!, $email: String!) {
     createRequest(
-      input: { idteam: $idteam, idliason: $idliason, idstudent: $idstudent }
+      input: { idteam: $idteam, idliason: $idliason, idstudent: $idstudent, email: $email }
     ) {
       request {
         idteam
@@ -51,12 +51,14 @@ class JoinRequest extends Component {
   onTeamSelect(team) {
     //   console.log(STUDENT);
     var studentId = JSON.parse(window.localStorage.getItem("user")).user.id;
+    var studentEmail = JSON.parse(window.localStorage.getItem("user")).user.email;
     const REQUEST = {
       idteam: utf8.decode(base64.decode(team.id)).replace("TeamSchema:", ""),
       idliason: team.idliason,
       idstudent: utf8
         .decode(base64.decode(studentId))
-        .replace("UserSchema:", "")
+        .replace("UserSchema:", ""),
+      email: studentEmail
     };
     console.log(REQUEST);
     this.props.client.mutate({

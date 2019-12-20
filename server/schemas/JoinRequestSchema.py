@@ -8,6 +8,7 @@ class RequestAttribute:
 	idteam = graphene.Int()
 	idstudent = graphene.Int()
 	idliason = graphene.Int()
+	email = graphene.String()
 
 class Request(SQLAlchemyObjectType, RequestAttribute):
 	class Meta:

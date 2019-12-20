@@ -18,8 +18,8 @@ msg['From'] = me
 
 class EmailAttribute:
     email = graphene.String(description="email address")
-    idteam = graphene.Int(description="team id")
-    idcourse = graphene.String(description="course id")
+    #idteam = graphene.Int(description="team id")
+    #idcourse = graphene.String(description="course id")
 
 
 class Email(SQLAlchemyObjectType, EmailAttribute):
@@ -35,7 +35,7 @@ class CreateEmailInput(graphene.InputObjectType, EmailAttribute):
     pass
 
 class CreateEmail(graphene.Mutation):
-    user = graphene.Field(lambda: Email, description="Person created by this mutation.")
+    ok = graphene.Boolean();
 
     class Arguments:
         input = CreateEmailInput(required=True)
@@ -52,7 +52,8 @@ class CreateEmail(graphene.Mutation):
         s.login(me, my_password)
         you =  data["email"]
         msg['To'] = you
-        html = '<html><body><p>You have been accepted into team ' + str(data["idteam"]) + ' for course ' + data["idcourse"] + '</p></body></html>'
+        #html = '<html><body><p>You have been accepted into team ' + str(data["idteam"]) + ' for course ' + data["idcourse"] + '</p></body></html>'
+        html = '<html><body><p>You have been accepted into a team.</p></body></html>'
         part2 = MIMEText(html, 'html')
 
         msg.attach(part2)
@@ -63,4 +64,4 @@ class CreateEmail(graphene.Mutation):
         user = EmailModel(**data)
 
 
-        return CreateEmail(None)
+        return CreateEmail(ok = True)

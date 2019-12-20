@@ -25,10 +25,12 @@ const LOGIN_QUERY = gql`
       userpassword
       usert
       id
+	  email
       requests {
         id
         idteam
         idstudent
+		email
       }
     }
   }
@@ -66,7 +68,7 @@ class Login extends Component {
         variables: userData
       })
       .then(data => {
-        console.log(data);
+        console.log(data.data);
         const user = data.data.user;
 
         if (user.userpassword == this.state.password) {
@@ -76,7 +78,7 @@ class Login extends Component {
           if (user.usert === "S") {
             this.props.history.push("/studentChoicesMenu");
           } else {
-            this.props.history.push("/teacherChoicesMenu");
+            this.props.history.push("/profChoicesMenu");
           }
         } else {
           this.setState({

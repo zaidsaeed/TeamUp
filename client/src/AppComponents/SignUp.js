@@ -38,6 +38,7 @@ const SIGN_UP = gql`
           id
           idteam
           idstudent
+		  email
         }
       }
     }

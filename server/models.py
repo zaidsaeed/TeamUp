@@ -40,6 +40,7 @@ class Team_Join_Request(Base):
     idteam = Column(Integer, ForeignKey('teams.idteam'))
     idstudent = Column(Integer, ForeignKey('users.iduser'))
     idliason = Column(Integer, ForeignKey('users.iduser'))
+    email = Column(String)
 
 class User(Base):
     __tablename__ = 'users'

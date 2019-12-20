@@ -3,17 +3,12 @@ import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 
 const SEND_EMAIL = gql`
-  mutation createEmail($email: String!, $idteam: Int!, $idcourse: String!) {
+  mutation createEmail($email: String!) {
     createEmail(
-      input: { email: $email, idteam: $idteam, idcourse: $idcourse }
+      input: { email: $email}
     ) {
-      course {
-        id
-        email
-        idteam
-        idcourse
-      }
-    }
+		ok    
+	  }
   }
 `;
 
@@ -62,7 +57,7 @@ class Requests extends Component {
               this.props.updateState(user.user.requests);
               this.props.client.mutate({
                 mutation: SEND_EMAIL,
-                variables: {}
+                variables: {email: request.email}
               });
             }}
           >

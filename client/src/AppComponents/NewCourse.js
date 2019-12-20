@@ -32,7 +32,6 @@ class newCourse extends Component {
     super();
     this.state = {
       idcourse: "",
-      idprof: 0,
       deadline: "",
       minstudents: 0,
       maxstudents: 0
@@ -61,9 +60,10 @@ class newCourse extends Component {
                     noValidate
                     onSubmit={e => {
                       e.preventDefault();
+                      var userId = JSON.parse(window.localStorage.getItem("user")).user.iduser;
                       const newCourse = {
                         idcourse: this.state.idcourse,
-                        idprof: parseInt(this.state.idprof),
+                        idprof: parseInt(userId),
                         deadline: this.state.deadline,
                         minstudents: parseInt(this.state.minstudents),
                         maxstudents: parseInt(this.state.maxstudents)
@@ -84,17 +84,7 @@ class newCourse extends Component {
                         type="String"
                       />
                     </div>
-                    <div className="form-group">
-                      <input
-                        type="Number"
-                        className="form-control form-control-lg"
-                        placeholder="(WILL REMOVE THIS) Prof ID:"
-                        name="idprof"
-                        //value={this.state.idprof}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                    <div className="form-group">
+                      <div className="form-group">
                       <label>Team Creation Deadline:</label>
                       <input
                         type="Date"

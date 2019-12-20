@@ -20,7 +20,16 @@ class ProfChoicesMenu extends Component {
           className="btn btn-secondary btn-lg btn-block"
         >
           Set Up Course Parameters
+		</Link>
+        <Link
+          to="/ViewTeams"
+          style={{ width: "100%", height: "100%" }}
+          type="button"
+          className="btn btn-secondary btn-lg btn-block"
+        >
+          View Teams 
         </Link>
+
       </div>
     );
   }
