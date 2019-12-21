@@ -87,15 +87,15 @@ class SignUp extends Component {
                     noValidate
                     onSubmit={e => {
                       e.preventDefault();
-                      const newUser = {
+                      const newUser = {user: {
                         iduser: parseInt(this.state.iduser),
                         username: this.state.username,
                         userpassword: this.state.userpassword,
                         usertype: this.state.usertype,
 						email: this.state.email
-                      };
+                      }};
                       console.log("newUser", newUser);
-                      createUser({ variables: newUser })
+                      createUser({ variables: newUser.user })
                         .then(data => {
                           window.localStorage.setItem(
                             "user",
