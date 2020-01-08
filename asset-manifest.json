@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/TeamUp/static/css/main.34de6062.chunk.css",
+    "main.js": "/TeamUp/static/js/main.437eda17.chunk.js",
+    "main.js.map": "/TeamUp/static/js/main.437eda17.chunk.js.map",
+    "runtime-main.js": "/TeamUp/static/js/runtime-main.fe85150a.js",
+    "runtime-main.js.map": "/TeamUp/static/js/runtime-main.fe85150a.js.map",
+    "static/js/2.d89cf54f.chunk.js": "/TeamUp/static/js/2.d89cf54f.chunk.js",
+    "static/js/2.d89cf54f.chunk.js.map": "/TeamUp/static/js/2.d89cf54f.chunk.js.map",
+    "index.html": "/TeamUp/index.html",
+    "precache-manifest.49bb36222648f58f028c9510a5057973.js": "/TeamUp/precache-manifest.49bb36222648f58f028c9510a5057973.js",
+    "service-worker.js": "/TeamUp/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/TeamUp/static/css/main.34de6062.chunk.css.map",
+    "static/media/background.png": "/TeamUp/static/media/background.74b19564.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fe85150a.js",
+    "static/js/2.d89cf54f.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.437eda17.chunk.js"
+  ]
+}
